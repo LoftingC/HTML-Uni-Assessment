@@ -1,0 +1,128 @@
+PSEUDOCODE 
+//Start each html/php document with a SESSION START//
+TASK A) NEWPRODUCT.PHP
+//Create Title and Heading for the page//
+//Create a form which links to NEWPRODUCT2.PHP//
+	//Add text input boxes to allow user to enter the product name, manufacturer and descripton//
+	//Add number input boxes to allow user to enter the product price, stock level and age limit//
+	//Add a Submit button to send inputed information to the NEWPRODUCT2.PHP script//
+//End form//
+
+TASK A) NEWPRODUCT2.PHP
+//Read in product name, manufacturer, descripton, product price, stock level and age limit from the NEWPRODUCT.PHP script//
+//Connect to database//
+//Send SQL query to INSERT new data entry with the variables retrieved to the PRODUCTS table//
+//Close connection to the database//
+
+
+TASK B) SEARCH.HTML
+//Web page Heading and title//
+//Create form which links to SEARCH.PHP//
+	//Add a text input box for the search term//
+	//Add a submit button to send inputed value to SEARCH.PHP//
+//End form//
+//Add link to LOGIN.HTML//
+
+TASK B) SEARCH.PHP
+//Read in search variable from SEARCH.HTML//
+//Connect to database//
+//Run a SQL query to select all products matching the search term//
+//If there are matching products//
+	//Run a while loop through each result//
+	//Display product name and Price//
+	//Write a link to add product to the shopping basket, link must send product id to ADDSHOPPING.PHP//
+//Close connection//
+
+TASK C) ADDSHOPPING.PHP
+//Read in Product id from SEARCH.PHP//
+//Read in username from session variable//
+//Connect to database//
+//Test session variable//
+	//If session variable solent user = 'null'//
+		//Ask user to login, display link to login.html//
+	//Else// 
+		//Run SQL query to UPDATE the basket table with the selected product id and username//
+		//Run SQL query to UPDATE the product table to decrease the stock level by 1 where product id matches//
+//Close connection//
+
+TASK D) QUANTITY.PHP
+//Read in the product ID from SEARCH.PHP//
+//Connect to database//
+//ECHO out a form which links to ADDSHOPPING.PHP//
+	//Add a number input box for the quantity//
+	//Add product ID to the form as a hidden value//
+	//Add a submit button to send inputted data to ADDSHOPPING.PHP//
+//End form//
+
+TASK D) SEARCH.PHP (UPDATED FROM TASK B)
+//Read in search variable from SEARCH.HTML//
+//Connect to database//
+//Run a SQL query to select all products matching the search term//
+//If there are matching products//
+	//Run a while loop through each result//
+	//Display product name and Price//
+	//Write a link to add product to the shopping basket, link must send product id to QUANITIY.PHP//
+//Else inform user that no products matched the search//
+//End if//
+//Close connection//
+
+TASK D) ADDSHOPPING.PHP (UPDATED FROM TASK C)
+//Read in Product id from QUANTITY.PHP//
+//Read in Quantity from QUANTITY.PHP//
+//Read in username from session variable 'GateKeeper'//
+//Connect to database//
+//Test gatekeeper session variable//
+	//If username = 'null'//
+		//Ask user to login, display link to login.html//
+	//Else// 
+		//Run SQL query to UPDATE the basket table with the selected product id and username//
+		//Run SQL query to UPDATE the product table to decrease the stock level by QUANTITY where product id matches//
+//Close connection//
+
+
+TASK E) NEWPRODUCT.PHP (UPDATED FROM TASK A)
+//Test if the user is an admin with isset($_SESSION["isadmin"])//
+//If user is admin//
+	//Create Title and Heading for the page//
+	//Create a form which links to NEWPRODUCT2.PHP//
+		//Add text input boxes to allow user to enter the product name, manufacturer and descripton//
+		//Add number input boxes to allow user to enter the product price, stock level and age limit//
+		//Add a Submit button to send inputed information to the NEWPRODUCT2.PHP script//
+	//End form//
+//Else//
+	//Display warning message//
+	//Display link to SEARCH.HTML//
+
+TASK E) ADDSHOPPING.PHP (UPDATED FROM TASK D)
+//Read in Product id from QUANTITY.PHP//
+//Read in Quantity from QUANTITY.PHP//
+//Read in username from session variable 'GateKeeper'//
+//Connect to database//
+//Test gatekeeper session variable//
+	//If username = 'null'//
+		//Ask user to login, display link to login.html//
+	//Else//
+		//Write IF statement testing if that item is sold out//
+			//Run SQL query to UPDATE the basket table with the selected product id and username//
+			//Run SQL query to UPDATE the product table to decrease the stock level by QUANTITY where product id matches//
+		//Else//
+			//Display message saying the product is sold out//
+//Close connection//
+
+
+TASK F) SEARCH.HTML (UPDATED FROM TASK B)
+//Web page Heading and title//
+//Create form which links to SEARCH.PHP//
+	//Add a text input box for the search term//
+	//Add a submit button to send inputed value to SEARCH.PHP//
+//End form//
+//Display a link taking the user to VIEWSHOPPING.PHP//
+
+TASK F) VIEWSHOPPING.PHP
+//Connect to the database//
+//Read is username from the session variable//
+//Create a total price variable//
+
+
+
+
